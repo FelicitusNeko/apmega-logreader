@@ -16,8 +16,8 @@ Yarn is recommended for package management. Start by typing `yarn` to set up the
 
 ## API Endpoints
 
-`/total`: The total number of checks both sent and received by each game.
-`/sincelast`: The number of checks sent and received by each game since the last time this endpoint was queried. Returns HTTP 204 if no checks were read from the server.
+- `/total`: The total number of checks both sent and received by each game.
+- `/sincelast`: The number of checks sent and received by each game since the last time this endpoint was queried. Returns HTTP 204 if no checks were read from the server.
 
 ### Output
 
