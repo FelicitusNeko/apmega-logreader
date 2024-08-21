@@ -5,4 +5,4 @@ node_modules/
 *.log
 .env
 *.json
-test.txt
+*.txt
