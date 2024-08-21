@@ -1,51 +1,34 @@
-﻿# typescript-bolierplate
+﻿# Archimegalo log reader/API server
 
+Reads Archipelago server log output and saves it to a dated file for later use. Also provides live data via a small API server.
 
-clone을 하고나서 yarn과 npm 둘중 선호하는 것을 이용해서 install을 해줍니다.
+## .env file
 
-```bash
-npm install   // npm 일 경우
-yarn install  // yarn 일 경우
+Please set your environment file accordingly:
+
+- `AP_DIR`: the path where Archipelago lives (`ArchipelagoServer.exe` as this script currently assumes Windows precompiled binaries)
+- `AP_GAME`: the `.archipelago` or `.zip` file you want it to load (can be relative to `AP_DIR`)
+- `SRV_PORT`: *Optional.* The port where API data will be served. Defaults to 22422.
+
+## Operation
+
+Yarn is recommended for package management. Start by typing `yarn` to set up the environment (assuming Yarn is properly installed), then `yarn start` will do a clean build of the project and run it.
+
+## API Endpoints
+
+`/total`: The total number of checks both sent and received by each game.
+`/sincelast`: The number of checks sent and received by each game since the last time this endpoint was queried. Returns HTTP 204 if no checks were read from the server.
+
+### Output
+
+```typescript
+interface APTally {
+  checksRcvd: number[];
+  checksSent: number[];
+  total: number;
+}
 ```
 
-## Recommendations
-- IDE - vscode
-- node -v 18.17.0
-- src/main.ts  -> default configuration
-- fnm - node version manager
-- yarn
+## Other
 
-## Explanation
-
-### 1. Prettier
-.prettierrc을 이용해서 prettier의 설정을 바꿀 수 있습니다.<br>
-기본적으로 많이 사용하는 것을 이용했습니다.<br>
-
-https://prettier.io/docs/en/index.html<br>
-
-
-### 2. Eslint
-.eslintrc.js을 이용해서 eslint의 설정을 바꿀 수 있습니다.<br>
-airbnb를 사용했습니다. 기본적으로 리액트가 아닌 node에 초점을 두었습니다.
-
-https://github.com/eslint/eslint
-
-
-## Usage
-
-컴파일과 함께 실행
-```
-yarn start    //yarn 일 경우
-npm run start // npm 일 경우
-```
-
-파일감지(nodemon)실행
-```
-yarn dev     // yarn 일 경우
-npm run dev  // npm 일 경우
-```
-
-업그레이드
-```
-yarn upgrade-interactive [--latest]
-```
+Several utility functions also exist in `util.ts` to assist with reading server logs to count checks or assemble an inventory, reading a spoiler file to count total checks per game, and reading a saved datapackage JSON (which mostly is for filtering out non-items from the spoiler file while counting). Nothing is really well documented at the moment; apologies for that!
