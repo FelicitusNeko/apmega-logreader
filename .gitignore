@@ -1,0 +1,8 @@
+dist/
+node_modules/
+.yarn/
+.vscode/
+*.log
+.env
+*.json
+test.txt
